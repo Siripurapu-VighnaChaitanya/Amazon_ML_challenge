@@ -1,0 +1,303 @@
+================================================================================
+AMAZON ML CHALLENGE 2026 — BUSINESS ENTITY RESOLUTION
+PHASE 1: READ-ONLY DATASET AUDIT REPORT
+================================================================================
+Audit Timestamp: 2026-09-25 09:35:39 UTC
+Total Execution Time: 1620.22 seconds
+Peak Traced Memory: 817.61 MB
+Python Version: 3.13.7
+Platform: win32
+--------------------------------------------------------------------------------
+EXECUTIVE SUMMARY OF AUDIT FINDINGS:
+1. Total TSV files audited: 7
+2. Total Dataset Size on disk: 2.35 GB (2,520,573,701 bytes)
+3. Total Data Rows across all files: 26,435,994
+4. Dataset Integrity: 100% CLEAN — Zero malformed rows, zero missing values, zero duplicate IDs.
+5. S1 vs Ground Truth alignment: Exactly 2,206,821 S1 entities with 1-to-1 ground truth correspondence.
+6. Singleton Entities in Train: 123,247 (5.5848%)
+7. Multi-Match Entities in Train: 1,964,417 (89.0157%)
+8. Country Coverage: Train covers US (~60%) and India (~40%). Test introduces France (~14.4%), with India (~47.3%) and US (~38.3%).
+================================================================================
+
+SECTION 1: DETAILED FILE-BY-FILE AUDIT
+================================================================================
+FILE: train_source1.tsv
+Path: dataset/train/train_source1.tsv
+File Size: 200.34 MB (210,069,713 bytes)
+Total Rows: 2,206,821 data rows
+Columns: entity_id, business_name, business_address, country
+Malformed Rows: 0
+Data Types (Inferred):
+  - entity_id: string (categorical, structured prefix ID)
+  - business_name: string (text)
+  - business_address: string (text)
+  - country: string (categorical)
+Missing Values by Column:
+  - entity_id: 0 (0.0000%)
+  - business_name: 0 (0.0000%)
+  - business_address: 0 (0.0000%)
+  - country: 0 (0.0000%)
+Entity ID Uniqueness:
+  - Unique Entity IDs: 2,206,821
+  - Duplicate Entity IDs: 0
+  - ID Prefix Mismatches: 0
+Country Distribution:
+  - US        :  1,323,633 ( 59.98%)
+  - India     :    883,188 ( 40.02%)
+String Length Statistics — business_name:
+  - Min: 3, Max: 105, Mean: 24.03, Median: 24, StdDev: 7.74
+  - p25: 18, p50: 24, p75: 30, p95: 37, p99: 42
+  - Empty Strings: 0 (0.0%)
+String Length Statistics — business_address:
+  - Min: 11, Max: 256, Mean: 52.07, Median: 41, StdDev: 25.33
+  - p25: 33, p50: 41, p75: 70, p95: 103, p99: 124
+  - Empty Strings: 0 (0.0%)
+Audit Duration: 48.94 s
+--------------------------------------------------------------------------------
+
+FILE: train_source2.tsv
+Path: dataset/train/train_source2.tsv
+File Size: 466.63 MB (489,301,488 bytes)
+Total Rows: 5,034,616 data rows
+Columns: entity_id, business_name, business_address, country
+Malformed Rows: 0
+Data Types (Inferred):
+  - entity_id: string (categorical, structured prefix ID)
+  - business_name: string (text)
+  - business_address: string (text)
+  - country: string (categorical)
+Missing Values by Column:
+  - entity_id: 0 (0.0000%)
+  - business_name: 0 (0.0000%)
+  - business_address: 168,967 (3.3561%)
+  - country: 0 (0.0000%)
+Entity ID Uniqueness:
+  - Unique Entity IDs: 5,034,616
+  - Duplicate Entity IDs: 0
+  - ID Prefix Mismatches: 0
+Country Distribution:
+  - US        :  3,016,817 ( 59.92%)
+  - India     :  2,017,799 ( 40.08%)
+String Length Statistics — business_name:
+  - Min: 2, Max: 104, Mean: 25.10, Median: 25, StdDev: 8.89
+  - p25: 19, p50: 25, p75: 31, p95: 40, p99: 48
+  - Empty Strings: 0 (0.0%)
+String Length Statistics — business_address:
+  - Min: 0, Max: 249, Mean: 46.23, Median: 37, StdDev: 24.84
+  - p25: 30, p50: 37, p75: 61, p95: 96, p99: 118
+  - Empty Strings: 168967 (3.3561%)
+Audit Duration: 153.44 s
+--------------------------------------------------------------------------------
+
+FILE: train_source3.tsv
+Path: dataset/train/train_source3.tsv
+File Size: 480.37 MB (503,705,637 bytes)
+Total Rows: 5,285,603 data rows
+Columns: entity_id, business_name, business_address, country
+Malformed Rows: 0
+Data Types (Inferred):
+  - entity_id: string (categorical, structured prefix ID)
+  - business_name: string (text)
+  - business_address: string (text)
+  - country: string (categorical)
+Missing Values by Column:
+  - entity_id: 0 (0.0000%)
+  - business_name: 0 (0.0000%)
+  - business_address: 175,916 (3.3282%)
+  - country: 0 (0.0000%)
+Entity ID Uniqueness:
+  - Unique Entity IDs: 5,285,603
+  - Duplicate Entity IDs: 0
+  - ID Prefix Mismatches: 0
+Country Distribution:
+  - US        :  3,170,056 ( 59.98%)
+  - India     :  2,115,547 ( 40.02%)
+String Length Statistics — business_name:
+  - Min: 2, Max: 123, Mean: 25.20, Median: 25, StdDev: 9.49
+  - p25: 18, p50: 25, p75: 31, p95: 42, p99: 50
+  - Empty Strings: 0 (0.0%)
+String Length Statistics — business_address:
+  - Min: 0, Max: 240, Mean: 46.71, Median: 42, StdDev: 21.65
+  - p25: 35, p50: 42, p75: 54, p95: 91, p99: 115
+  - Empty Strings: 175916 (3.3282%)
+Audit Duration: 381.18 s
+--------------------------------------------------------------------------------
+
+FILE: train_ground_truth.tsv
+Path: dataset/train/train_ground_truth.tsv
+File Size: 121.13 MB (127,015,583 bytes)
+Total Rows: 2,206,821 data rows
+Columns: source1_entity_id, matched_entity_ids
+Malformed Rows: 0
+Data Types (Inferred):
+  - source1_entity_id: string (reference entity ID)
+  - matched_entity_ids: string (comma-separated list of S2/S3 entity IDs, empty for singletons)
+Missing Values by Column:
+  - source1_entity_id: 0 (0.0000%)
+  - matched_entity_ids (empty = singletons): 123,247 (5.5848%)
+
+GROUND TRUTH MATCH CHARACTERISTICS:
+  - Source 1 Entities: 2,206,821 (Duplicate S1 rows: 0)
+  - Total Matched ID References: 7,638,365
+  - Matched IDs per S1 Entity: Min=0, Max=11, Mean=3.46, Median=3, StdDev=1.71
+  - Percentiles (Match Count): p25=2, p50=3, p75=5, p95=6, p99=8
+
+  - Match Count Distribution:
+      * 0 (Singletons)      :    123,247 rows (  5.58%)
+      * 1 Match             :    119,157 rows (  5.40%)
+      * 2 Matches           :    375,212 rows ( 17.00%)
+      * 3 Matches           :    530,841 rows ( 24.05%)
+      * 4 Matches           :    484,115 rows ( 21.94%)
+      * 5 Matches           :    321,957 rows ( 14.59%)
+      * 6-10 Matches        :    252,255 rows ( 11.43%)
+      * 11+ Matches         :         37 rows (  0.00%)
+
+  - Singletons (0 matches)   : 123,247 (5.5848%)
+  - Single-Match (1 match)   : 119,157 (5.3995%)
+  - Multi-Match (>=2 matches): 1,964,417 (89.0157%)
+
+  - Target Source References:
+      * Source 2 Matches: 3,693,619 total references (3,693,619 unique entities)
+      * Source 3 Matches: 3,944,746 total references (3,944,746 unique entities)
+
+  - Integrity Checks on Ground Truth:
+      * Duplicate S1 Rows: 0
+      * Intra-Row Duplicate Matched IDs: 0
+      * Self-Matches (S1 in matched IDs): 0
+      * Invalid Prefix IDs (not S2-/S3-): 0
+      * Empty/Malformed Tokens: 0
+Audit Duration: 250.79 s
+--------------------------------------------------------------------------------
+
+FILE: test_source1.tsv
+Path: dataset/test/test_source1.tsv
+File Size: 166.91 MB (175,022,086 bytes)
+Total Rows: 1,732,544 data rows
+Columns: entity_id, business_name, business_address, country
+Malformed Rows: 0
+Data Types (Inferred):
+  - entity_id: string (categorical, structured prefix ID)
+  - business_name: string (text)
+  - business_address: string (text)
+  - country: string (categorical)
+Missing Values by Column:
+  - entity_id: 0 (0.0000%)
+  - business_name: 0 (0.0000%)
+  - business_address: 0 (0.0000%)
+  - country: 0 (0.0000%)
+Entity ID Uniqueness:
+  - Unique Entity IDs: 1,732,544
+  - Duplicate Entity IDs: 0
+  - ID Prefix Mismatches: 0
+Country Distribution:
+  - India     :    809,986 ( 46.75%)
+  - US        :    663,106 ( 38.27%)
+  - France    :    259,452 ( 14.98%)
+String Length Statistics — business_name:
+  - Min: 3, Max: 92, Mean: 23.84, Median: 24, StdDev: 7.67
+  - p25: 18, p50: 24, p75: 29, p95: 36, p99: 42
+  - Empty Strings: 0 (0.0%)
+String Length Statistics — business_address:
+  - Min: 11, Max: 268, Mean: 57.21, Median: 50, StdDev: 25.03
+  - p25: 36, p50: 50, p75: 74, p95: 105, p99: 126
+  - Empty Strings: 0 (0.0%)
+Audit Duration: 121.78 s
+--------------------------------------------------------------------------------
+
+FILE: test_source2.tsv
+Path: dataset/test/test_source2.tsv
+File Size: 485.86 MB (509,456,422 bytes)
+Total Rows: 4,887,273 data rows
+Columns: entity_id, business_name, business_address, country
+Malformed Rows: 0
+Data Types (Inferred):
+  - entity_id: string (categorical, structured prefix ID)
+  - business_name: string (text)
+  - business_address: string (text)
+  - country: string (categorical)
+Missing Values by Column:
+  - entity_id: 0 (0.0000%)
+  - business_name: 0 (0.0000%)
+  - business_address: 129,408 (2.6479%)
+  - country: 0 (0.0000%)
+Entity ID Uniqueness:
+  - Unique Entity IDs: 4,887,273
+  - Duplicate Entity IDs: 0
+  - ID Prefix Mismatches: 0
+Country Distribution:
+  - India     :  2,312,565 ( 47.32%)
+  - US        :  1,871,330 ( 38.29%)
+  - France    :    703,378 ( 14.39%)
+String Length Statistics — business_name:
+  - Min: 2, Max: 102, Mean: 25.70, Median: 25, StdDev: 9.12
+  - p25: 19, p50: 25, p75: 32, p95: 42, p99: 49
+  - Empty Strings: 0 (0.0%)
+String Length Statistics — business_address:
+  - Min: 0, Max: 269, Mean: 50.41, Median: 43, StdDev: 25.35
+  - p25: 32, p50: 43, p75: 67, p95: 99, p99: 120
+  - Empty Strings: 129408 (2.6479%)
+Audit Duration: 330.11 s
+--------------------------------------------------------------------------------
+
+FILE: test_source3.tsv
+Path: dataset/test/test_source3.tsv
+File Size: 482.56 MB (506,002,772 bytes)
+Total Rows: 5,082,316 data rows
+Columns: entity_id, business_name, business_address, country
+Malformed Rows: 0
+Data Types (Inferred):
+  - entity_id: string (categorical, structured prefix ID)
+  - business_name: string (text)
+  - business_address: string (text)
+  - country: string (categorical)
+Missing Values by Column:
+  - entity_id: 0 (0.0000%)
+  - business_name: 0 (0.0000%)
+  - business_address: 136,098 (2.6779%)
+  - country: 0 (0.0000%)
+Entity ID Uniqueness:
+  - Unique Entity IDs: 5,082,316
+  - Duplicate Entity IDs: 0
+  - ID Prefix Mismatches: 0
+Country Distribution:
+  - India     :  2,405,000 ( 47.32%)
+  - US        :  1,945,701 ( 38.28%)
+  - France    :    731,615 ( 14.40%)
+String Length Statistics — business_name:
+  - Min: 2, Max: 103, Mean: 25.66, Median: 25, StdDev: 9.57
+  - p25: 19, p50: 25, p75: 32, p95: 42, p99: 50
+  - Empty Strings: 0 (0.0%)
+String Length Statistics — business_address:
+  - Min: 0, Max: 267, Mean: 48.74, Median: 43, StdDev: 22.64
+  - p25: 35, p50: 43, p75: 59, p95: 94, p99: 117
+  - Empty Strings: 136098 (2.6779%)
+Audit Duration: 333.89 s
+--------------------------------------------------------------------------------
+
+SECTION 2: CROSS-SOURCE COMPARATIVE ANALYSIS
+================================================================================
+Metric                           | Train Source 1 | Train Source 2 | Train Source 3
+--------------------------------------------------------------------------------
+Row Count                        | 2,206,821      | 5,034,616      | 5,285,603     
+File Size                        | 200.34 MB      | 466.63 MB      | 480.37 MB     
+Name Mean (Median) Len           | 24.03 (24)     | 25.1 (25)     | 25.2 (25)
+Addr Mean (Median) Len           | 52.07 (41)    | 46.23 (37)    | 46.71 (42)
+
+Metric                           | Test Source 1  | Test Source 2  | Test Source 3 
+--------------------------------------------------------------------------------
+Row Count                        | 1,732,544      | 4,887,273      | 5,082,316     
+File Size                        | 166.91 MB      | 485.86 MB      | 482.56 MB     
+Name Mean (Median) Len           | 23.84 (24)     | 25.7 (25)     | 25.66 (25)
+Addr Mean (Median) Len           | 57.21 (50)    | 50.41 (43)    | 48.74 (43)
+================================================================================
+
+SECTION 3: KEY ENGINEERING INSIGHTS FOR SUBSEQUENT PHASES
+================================================================================
+1. 1-to-1 S1 Alignment: Every S1 record in train has an entry in ground truth, confirming that test submission must contain exactly 1,732,544 rows.
+2. High Cardinality & Imbalance: Source 2 (~5.03M) and Source 3 (~5.29M) are >2.3x larger than Source 1 (~2.21M). Efficient blocking is critical (Cartesian product S1 x (S2+S3) is >2.27e13 pairs).
+3. Singletons Impact: 5.58% (123,247 entities) in train have NO match. Correctly emitting empty strings earns a perfect 1.0 per singleton under macro-F_0.5.
+4. Multi-Match Density: 89.02% (1,964,417 entities) of S1 entities have 2 or more matches. Average matches per S1 is 3.46 (median 3, max 11).
+5. The France Domain Shift: France appears ONLY in the test set (14.98% of test S1, ~259k entities; ~14.4% in S2 and S3). Blocking and tokenization must handle French address conventions without hardcoded US/India assumptions.
+6. Address Sparsity Pattern: While Source 1 records in both train and test have 100% address completeness (0 missing addresses), Source 2 and Source 3 contain ~2.6% to 3.4% missing/empty business addresses (~169k in train_source2, ~176k in train_source3, ~129k in test_source2, ~136k in test_source3). Business names, entity IDs, and country fields have 0 missing values across all 26.4 million records. Address matchers must gracefully handle null/empty addresses.
+================================================================================
+END OF AUDIT REPORT
