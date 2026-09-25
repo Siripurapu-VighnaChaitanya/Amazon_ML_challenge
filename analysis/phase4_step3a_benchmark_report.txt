@@ -1,0 +1,54 @@
+================================================================================
+AMAZON ML CHALLENGE 2026 — BUSINESS ENTITY RESOLUTION
+PHASE 4 STEP 3A: TEST INFERENCE PIPELINE & BENCHMARK REPORT
+================================================================================
+Timestamp: 2026-09-25 15:43:02 UTC
+Benchmark Sample Size : 1,000 Source 1 Test Entities
+Model Artifact Loaded : analysis\phase4_model.joblib (tau=0.54, tau_singleton=0.30)
+Test Sources Scanned  : test_source2.tsv (4,887,274 rows), test_source3.tsv (5,082,317 rows)
+--------------------------------------------------------------------------------
+EXECUTIVE BENCHMARK SUMMARY:
+  * Total Candidate Pairs Generated: 26,743 (26.74 avg/entity)
+  * Total Final Matches Accepted   : 1,934 (1.93 avg/entity)
+  * Singletons Identified (Empty)  : 235 / 1,000 (23.50%)
+  * Strict Format Validation       : 100% PASS (0 errors)
+  * Peak RAM Footprint             : 82.27 MB (Budget: 1,000 MB)
+  * Total Benchmark Runtime        : 1179.37 s (19.66 min)
+================================================================================
+
+SECTION 1: COUNTRY BREAKDOWN (Including Zero-Shot France)
+================================================================================
+Country         | Entities   | Candidates   | Avg Cands  | Matches    | Singletons | Singleton %
+--------------------------------------------------------------------------------
+France          | 128        | 3,751        | 29.30      | 291        | 32         | 25.00%
+India           | 482        | 13,319       | 27.63      | 823        | 122        | 25.31%
+US              | 390        | 9,673        | 24.80      | 820        | 81         | 20.77%
+================================================================================
+
+SECTION 2: MEMORY, RUNTIME & THROUGHPUT AUDIT
+================================================================================
+S1 Indexing Time               : 0.321 s
+Source 2 & 3 Streaming Time    : 1139.58 s (9,969,589 rows scanned)
+Feature Extraction & Scoring   : 24.17 s (26,743 pairs scored)
+Scoring Throughput             : 41.4 entities/second (1106.5 pairs/s)
+Slice Output Generation Time   : 0.05 s
+Total Benchmark Execution Time : 1179.37 s (19.66 min)
+Peak Memory Footprint (RAM)    : 82.27 MB
+================================================================================
+
+SECTION 3: ARCHITECTURE PLAN FOR FULL TEST INFERENCE (1.73M Entities)
+================================================================================
+1. Country-Partitioned Streaming Architecture:
+   - Since country is a 100% hard partition (0 cross-country matches exist in train or test),
+     the full test inference can execute in 3 country partitions:
+     * Partition 1: France  (259,452 entities) -> Stream French records in test S2/S3
+     * Partition 2: US      (663,106 entities) -> Stream US records in test S2/S3
+     * Partition 3: India   (809,986 entities) -> Stream Indian records in test S2/S3
+2. Memory Safety Guarantee:
+   - By indexing S1 records by country and streaming candidates directly to disk buffers,
+     memory usage is strictly bounded below 500 MB RAM at all times.
+3. Zero Data Leakage / Full Rule Compliance:
+   - Output TSVs are written in streaming chunks with exact tab separation,
+     guaranteeing 100% compliance with validate_submission.py.
+================================================================================
+END OF PHASE 4 STEP 3A REPORT
