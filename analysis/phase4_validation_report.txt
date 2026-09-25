@@ -1,0 +1,72 @@
+================================================================================
+AMAZON ML CHALLENGE 2026 — BUSINESS ENTITY RESOLUTION
+PHASE 4 STEP 2: ML RERANKER TRAINING & VALIDATION REPORT
+================================================================================
+Timestamp: 2026-09-25 14:53:10 UTC
+Training Sample Size   : 30,000 Source 1 Entities (Seed=43, Disjoint from Val)
+Validation Sample Size : 10,000 Source 1 Entities (Seed=42, Frozen)
+Comparison Baseline    : Phase 3B Heuristic Pipeline (Macro F0.5 = 0.6008)
+--------------------------------------------------------------------------------
+EXECUTIVE PERFORMANCE HEADLINE:
+  * Phase 4 Macro F0.5     : 0.6723  (Phase 3B: 0.6008 | Delta: +0.0715)
+  * Phase 4 Macro Precision: 0.7643  (Phase 3B: 0.6451 | Delta: +0.1192)
+  * Phase 4 Macro Recall   : 0.5291  (Phase 3B: 0.5907 | Delta: -0.0616)
+  * Optimal tau (match)    : 0.54
+  * Optimal tau_singleton  : 0.30
+  * Singleton Accuracy     : 486/556 (87.41% vs Phase 3B 39.39%)
+================================================================================
+
+SECTION 1: HEAD-TO-HEAD COMPARISON AGAINST PHASE 3B
+================================================================================
+Metric                             | Phase 3B Heuristic   | Phase 4 ML Reranker  | Absolute Delta
+--------------------------------------------------------------------------------
+Macro F0.5 (Official Metric)       | 0.6008               | 0.6723               | +0.0715
+Macro Precision                    | 0.6451               | 0.7643               | +0.1192
+Macro Recall                       | 0.5907               | 0.5291               | -0.0616
+Micro Precision                    | 0.3526               | 0.9399               | +0.5873
+Micro Recall                       | 0.6040               | 0.5084               | -0.0956
+True Positives (TP)                | 20,798               | 17,506               | -3,292
+False Positives (FP)               | 38,182               | 1,120                | -37,062
+False Negatives (FN)               | 13,638               | 16,930               | +3,292
+True Singletons                    | 556                  | 556                  | 0
+Correctly Predicted Singletons     | 219                  | 486                  | +267
+Singleton Accuracy                 | 39.39%               | 87.41%               | +48.02%
+================================================================================
+
+SECTION 2: MODEL ABLATION COMPARISON (HistGradientBoosting vs LogisticRegression)
+================================================================================
+Metric                             | HistGradientBoosting | LogisticRegression   | Difference
+--------------------------------------------------------------------------------
+Macro F0.5                         | 0.6723               | 0.6464               | +0.0259
+Macro Precision                    | 0.7643               | 0.7252               | +0.0391
+Macro Recall                       | 0.5291               | 0.5299               | -0.0009
+Micro Precision                    | 0.9399               | 0.8771               | +0.0628
+Micro Recall                       | 0.5084               | 0.5209               | -0.0125
+Singleton Accuracy                 | 87.41%               | 67.27%               | +20.14%
+Selected tau                       | 0.54                 | 0.34                 | -
+Selected tau_singleton             | 0.30                 | 0.30                 | -
+Training Runtime                   | 18.51s               | 2.07s                | -
+================================================================================
+
+SECTION 3: TRAINING CANDIDATE & DATASET STATISTICS
+================================================================================
+Training S1 Entities Sampled : 30,000
+Validation / Train Overlap   : 0 (Strictly 100% disjoint)
+Total Training Candidate Pairs: 740,298
+  - Positive Labels (y=1)    : 58,574 (7.91%)
+  - Negative Labels (y=0)    : 681,724 (92.09%)
+  - Positive/Negative Ratio  : 0.0859 (1 : 11.64)
+  - Candidate Recall Ceiling : 58,574 / 103,959 (56.34%)
+Total Validation Candidates  : 242,792
+================================================================================
+
+SECTION 4: RESOURCE UTILIZATION & RUNTIME AUDIT
+================================================================================
+Candidate Generation Runtime : 1452.64 s
+Feature Extraction Runtime   : 335.03 s
+GBDT Model Training Runtime  : 18.51 s
+Validation Evaluation Runtime: 124.64 s
+Total End-to-End Pipeline    : 2273.84 s (37.90 min)
+Peak Memory Footprint (RAM)  : 3921.90 MB (Budget: 500 MB)
+================================================================================
+END OF PHASE 4 STEP 2 REPORT
