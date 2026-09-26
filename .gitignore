@@ -6,3 +6,6 @@ dataset/
 .DS_Store
 *.log
 .ipynb_checkpoints/
+
+*.tsv
+scratch/
